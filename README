@@ -1,0 +1,42 @@
+This is the application for prediction of stocks behavior in coming trading day.
+There are three possible classifications:
+    - The stock will raise, and this is good opportunity for "Long" trade
+    - The stock will fall, and this is good opportunity for "Short" trade
+    - The stock will shuffle, and this is not good opportunity to trade this specific stock
+
+Data
+The data about all stocks is taken from the site: https://finance.yahoo.com
+The target classification for each trading day is calculated as difference(in percents) between
+current trading day and next trading day.
+    - The change higher than 2% is classified as prediction for long trade
+    - The change lower than 2% is classified as prediction for short trade
+    - In other cases it is classified as prediction for shuffle stock
+
+Model
+The model, used for the prediction, is Random Forest Classifier with 80 estimators.
+A number of columns are calculated from original data, e.g. change between
+values of the stocks in different time snippets, as well as the distance to local minimum
+and maximum in different periods of the time.
+All calculated columns are converted to percentage in order to achieve data homogeneity for different stocks.
+The prediction model is based only on calculated columns.
+
+
+Application pages:
+    Home
+    The page displays the last trading day summary of favorite stocks. The data is updated daily.
+    By clicking on "more..." the user can see the history of last 100 trading days.
+
+    Predict
+    The page displays prediction of the coming day for the stocks in the list of the favorites.
+    The prediction model is calculated each time when the page is refreshed,
+    therefore the prediction results might change after the refresh.
+    By clicking on "more..." the user can see the page with model details.
+
+    Favorites
+    In this page the user can manage his favorite stocks. The favorites list must include at least 5 stocks.
+    This is required for proper calculation of the model, therefore the application will limit possibility
+    to use less stocks.
+    In addition the application will not allow to add to favorite list stocks with too short history.
+
+
+

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="container">
+    <h5 class="mt-5"> About </h5>
+    <p>
+        This is the application for prediction of stocks behavior in coming trading day.
+        There are three possible classifications:<br/>
+        <li> The stock will raise, and this is good opportunity for "Long" trade </li>
+        <li> The stock will fall, and this is good opportunity for "Short" trade </li>
+        <li> The stock will shuffle, and this is not good opportunity to trade this specific stock </li>
+    </p>
+</div>
+
+<div class="container">
+    <h5 class="mt-5"> Data </h5>
+    <p>
+        The data about all stocks is taken from the site:
+        <a href="https://finance.yahoo.com" target="_blank"> https://finance.yahoo.com </a> <br/>
+        The target classification for each trading day is calculated as difference(in percents) between
+        current trading day and next trading day.
+        <li> The change higher than 2% is classified as prediction for long trade </li>
+        <li> The change lower than 2% is classified as prediction for short trade </li>
+        <li>In other cases it is classified as prediction for shuffle stock</li>
+    </p>
+</div>
+
+<div class="container">
+    <h5 class="mt-5"> Model </h5>
+    <p>
+        The model, used for the prediction, is Random Forest Classifier with 80 estimators.
+        A number of columns are calculated from original data,<br/> e.g. change between
+        values of the stocks in different time snippets, as well as the distance to local minimum
+        and maximum in different periods of the time. <br/>
+        All calculated columns are converted to percentage in order to achieve data homogeneity for different stocks.<br/>
+        The prediction model is based only on calculated columns.
+    </p>
+</div>
+
+<div class="container">
+    <h5 class="mt-5"><a href="/"> Home </a></h5>
+    <p>
+        The page displays the last trading day summary of favorite stocks. The data is updated daily.<br/>
+        By clicking on "<u>more...</u>" the user can see the history of last 100 trading days.
+    </p>
+</div>
+
+<div class="container">
+    <h5 class="mt-5"><a href="/predict"> Predict </a></h5>
+    <p>
+        The page displays prediction of the coming day for the stocks in the list of the favorites.<br/>
+        The prediction model is calculated each time when the page is refreshed,
+        therefore the prediction results might change after the refresh.<br/>
+        By clicking on "<u>more...</u>" the user can see the page with model details.
+    </p>
+</div>
+
+<div class="container">
+    <h5 class="mt-5"><a href="/favorites"> Favorites </a></h5>
+    <p>
+        In this page the user can manage his favorite stocks. The favorites list must include at least 5 stocks.<br/>
+        This is required for proper calculation of the model, therefore the application will limit possibility
+        to use less stocks.<br/>
+        In addition the application will not allow to add to favorite list stocks with too short history.
+    </p>
+</div>
+
+<div class="text-left p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+    <b>Credits:</b> This application was developed by Gali Zaslavsky as final project in the course
+    "Data Science and Machine Learning" in John Brice College. <br/>
+
+    For more details and Curriculum Vitae, please contact to:
+    <a class="text-reset fw-bold" href="mailto:galizaslavsky@gmail.com">galizaslavsky@gmail.com</a>
+</div>
+{% endblock %}

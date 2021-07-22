@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="py-5 col-md-5 col-lg-4 order-md-last container">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Manage Favorites</span>
+        </h4>
+        <form class="card p-2" action="/favorites/add" method="POST" id="addform">
+          <div class="input-group">
+                <input type="text" class="form-control" placeholder="Stock Symbol" name="symbol">
+                <button type="submit" class="btn btn-secondary">Add</button>
+          </div>
+        </form>
+        <form class="card p-2" action="/favorites/delete" method="POST" id=""delform>
+            <ul class="list-group mb-3">
+              {% for i in range(0,stocks|length) %}
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                  <div>
+                    <h6 class="my-0">{{ stocks[i] }}</h6>
+                  </div>
+                  <input type="checkbox" class="form-check-input" id='mycheck' name="{{i}}">
+                </li>
+              {% endfor %}
+            </ul>
+            <button  type="submit" class="btn btn-secondary">Delete</button>
+        </form>
+</div>
+{% endblock %}

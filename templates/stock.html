@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<br>
+<h3>{{ name }}</h3>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Open</th>
+      <th scope="col">High</th>
+      <th scope="col">Low</th>
+      <th scope="col">Close</th>
+      <th scope="col">Volume</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for index,row in rows.iterrows()%}
+      <tr>
+        <td> {{ row['Date'] }} </td>
+        <td> {{ row['Open'] | round(2) }} </td>
+        <td> {{ row['High'] | round(2) }} </td>
+        <td> {{ row['Low'] | round(2) }} </td>
+        <td> {{ row['Close'] | round(2) }} </td>
+        <td> {{ row['Volume'] | round(2) }} </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

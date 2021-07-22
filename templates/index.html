@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Symbol</th>
+      <th scope="col">Date</th>
+      <th scope="col">Open</th>
+      <th scope="col">High</th>
+      <th scope="col">Low</th>
+      <th scope="col">Close</th>
+      <th scope="col">Volume</th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in range(0,rows|length) %}
+      <tr>
+        <th scope="row"> {{ stocks[i]}} </th>
+        <td> {{ rows[i]['Date'] }} </td>
+        <td> {{ rows[i]['Open'] | round(2) }} </td>
+        <td> {{ rows[i]['High'] | round(2) }} </td>
+        <td> {{ rows[i]['Low'] | round(2) }} </td>
+        <td> {{ rows[i]['Close'] | round(2) }} </td>
+        <td> {{ rows[i]['Volume'] }} </td>
+        <td>  <a href="/stock/{{stocks[i]}}">more...</a> </td>
+
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="py-5 text-center">
+      <h1>{{ name }}</h1>
+      <h4>Last trading day: </h4>
+      <h5> opened: {{ prediction['Open'] | round(2) }}, closed: {{ prediction['Close'] | round(2) }}</h5>
+      <br>
+      {% if prediction['Prediction'] == -1 %}
+      <p class="text-danger">Prediction: <b>Short Trade</b></p>
+            <img class="d-block mx-auto mb-4" src="../static/images/1077px-Red-Down-Arrow.png.png" alt="" width="144" height="114">
+      {% elif prediction['Prediction'] == 0 %}
+      <p class="text-secondary">Prediction: <b>Shuffling stock</b></p>
+            <img class="d-block mx-auto mb-4" src="../static/images/up-down-arrow.jpg.jpg" alt="" width="144" height="114">
+      {% elif prediction['Prediction'] == 1 %}
+      <p class="text-success">Prediction: <b>Long Trade</b></p>
+            <img class="d-block mx-auto mb-4" src="../static/images/1077px-Green-Up-Arrow.png.png" alt="" width="144" height="114">
+      {% endif %}
+      <p class="lead">The prediction model generated with <b>Random Forest Classifier</b> algorithm with 80 estimators</p>
+      <p class="lead">The model's score is <b> {{ score | round(4) }}</b> </p>
+
+<div class="container">
+      <h5> Classification report </h5>
+      <table class="table">
+            <thead>
+            <tr>
+                  <th scope="col"></th>
+                  <th scope="col">precision</th>
+                  <th scope="col">recall</th>
+                  <th scope="col">f1-score</th>
+                  <th scope="col">support</th>
+            </tr>
+            </thead>
+            <tbody>
+                  {% for row in report %}
+                        <tr>
+                        {% for cell in row%}
+                              <td> {{ cell }} </td>
+                        {% endfor %}
+                        </tr>
+                  {% endfor %}
+            </tbody>
+      </table>
+</div>
+</div>
+{% endblock %}
